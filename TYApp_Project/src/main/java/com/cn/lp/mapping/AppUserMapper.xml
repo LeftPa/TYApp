@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.lp.dao.IAppUserDao" >
+  <resultMap id="BaseResultMap" type="com.cn.lp.pojo.AppUser" >
+    <id column="appId" property="appId" jdbcType="VARCHAR" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="deviceType" property="deviceType" jdbcType="VARCHAR" />
+    <result column="deviceToken" property="deviceToken" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="personName" property="personName" jdbcType="VARCHAR" />
+    <result column="personHeader" property="personHeader" jdbcType="VARCHAR" />
+    <result column="registTime" property="registTime" jdbcType="TIMESTAMP" />
+    <result column="lastLoginTime" property="lastLoginTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    appId, userName, password, deviceType, deviceToken, version, personName, personHeader, 
+    registTime, lastLoginTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appuser
+    where appId = #{appId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appuser
+    where userName = #{userName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserNameAndPassword" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appuser
+    where 1=1 and  
+    userName = #{0} and password=#{1}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from appuser
+    where appId = #{appId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cn.lp.pojo.AppUser" >
+    insert into appuser (appId, userName, password, 
+      deviceType, deviceToken, version, 
+      personName, personHeader, registTime, 
+      lastLoginTime)
+    values (#{appId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{deviceType,jdbcType=VARCHAR}, #{deviceToken,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{personName,jdbcType=VARCHAR}, #{personHeader,jdbcType=VARCHAR}, #{registTime,jdbcType=TIMESTAMP}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.lp.pojo.AppUser" >
+    insert into appuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="appId != null" >
+        appId,
+      </if>
+      <if test="userName != null" >
+        userName,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="deviceType != null" >
+        deviceType,
+      </if>
+      <if test="deviceToken != null" >
+        deviceToken,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="personName != null" >
+        personName,
+      </if>
+      <if test="personHeader != null" >
+        personHeader,
+      </if>
+      <if test="registTime != null" >
+        registTime,
+      </if>
+      <if test="lastLoginTime != null" >
+        lastLoginTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceToken != null" >
+        #{deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="personName != null" >
+        #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="personHeader != null" >
+        #{personHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null" >
+        #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.lp.pojo.AppUser" >
+    update appuser
+    <set >
+      <if test="userName != null" >
+        userName = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null" >
+        deviceType = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceToken != null" >
+        deviceToken = #{deviceToken,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="personName != null" >
+        personName = #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="personHeader != null" >
+        personHeader = #{personHeader,jdbcType=VARCHAR},
+      </if>
+      <if test="registTime != null" >
+        registTime = #{registTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null" >
+        lastLoginTime = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where appId = #{appId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.lp.pojo.AppUser" >
+    update appuser
+    set userName = #{userName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      deviceType = #{deviceType,jdbcType=VARCHAR},
+      deviceToken = #{deviceToken,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      personName = #{personName,jdbcType=VARCHAR},
+      personHeader = #{personHeader,jdbcType=VARCHAR},
+      registTime = #{registTime,jdbcType=TIMESTAMP},
+      lastLoginTime = #{lastLoginTime,jdbcType=TIMESTAMP}
+    where appId = #{appId,jdbcType=VARCHAR}
+  </update>
+</mapper>

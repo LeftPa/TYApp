@@ -14,8 +14,7 @@ public class BaseResult {
 		this.RspDesc="成功";
 	}
 	public void writeSuccess(Object o){
-		this.RspCode="200";
-		this.RspDesc="成功";
+		writeSuccess();
 		this.Body=o;
 	}
 	public void writeFaile(){
