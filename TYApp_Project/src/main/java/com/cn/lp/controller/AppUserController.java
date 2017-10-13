@@ -85,4 +85,36 @@ public class AppUserController {
 		}
 		return JsonHelper.toJSON(br);
 	}
+	
+	@ResponseBody
+	@RequestMapping("/changePassword")
+	public Object  changePassword(HttpServletRequest request,Model model){
+		BaseResult br =new BaseResult();
+		String userName = request.getParameter("userName");
+		String newPassword = request.getParameter("newPassword");
+		if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(newPassword)) {
+			br.writeFaile("用户名或密码不能为空！");
+		} else {
+			try{
+				AppUser appUser=appUserService.getAppUserByUserName(userName);
+				if (appUser !=null ) {
+					appUser.setPassword(newPassword);
+					int r=appUserService.updateByPrimaryKey(appUser);
+					if(r==1){
+						br.writeSuccess();
+					}else{
+						br.writeFaile("失败，请重试！");
+					}
+				} else {
+					br.writeFaile("用户不存在！");
+				}
+			}
+			
+			catch(Exception ee){
+				//logger.error("数据异常!"+ee.getMessage()+";"+ee.getStackTrace());
+				br.writeFaile("数据异常!"+ee.getMessage()+";"+ee.getStackTrace());
+			}
+		}
+		return JsonHelper.toJSON(br);
+	}
 }

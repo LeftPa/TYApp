@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.poi.ss.formula.functions.T;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 
 /**
@@ -37,8 +38,8 @@ public class JsonHelper {
 	 * @param:@param jsonStr
 	 * @return:T
 	 */
-	public static T toObject(String jsonStr){
-		return  JSON.parseObject(jsonStr, T.class);  
+	public static JSONObject toObject(String jsonStr){
+		return  JSON.parseObject(jsonStr);  
 	}
 	
 	/**

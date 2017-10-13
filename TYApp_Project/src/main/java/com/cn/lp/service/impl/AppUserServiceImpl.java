@@ -44,4 +44,11 @@ public class AppUserServiceImpl implements IAppUserService {
 		return appUserDao.selectByUserNameAndPassword(userName, password);
 	}
 
+	public AppUser getAppUserByUserName(String userName){
+		return appUserDao.selectByUserName(userName);
+	}
+	
+	public int updateByPrimaryKey(AppUser appUser){
+		return appUserDao.updateByPrimaryKey(appUser);
+	}
 }
